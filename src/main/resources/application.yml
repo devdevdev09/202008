@@ -1,2 +1,9 @@
 server:
     port: 20040
+
+FILE_UPLOAD_PATH: D:/data/slacktohtml/tmp/
+
+spring:
+    servlet:
+        multipart:
+            location: D:/data/slacktohtml/tmp/

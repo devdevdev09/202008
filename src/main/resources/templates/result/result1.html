@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <li th:each="test : ${list}">
+        <span th:text="${test.username}"></span>
+        <span th:text="${test.type}"></span>
+    </li>
+
+    <ol th:each="test : ${list}">
+        <li th:text="${test.username}"></li>
+        <li th:text="${test.type}"></li>
+    </ol>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data" action="/fileupload/upload">
+        <input type="file" name="file" multiple/>
+        <input type="submit" value="upload"/>
+    </form>
+
+    <hr>
+
+    <form method="POST" enctype="multipart/form-data" action="/fileupload/uploadzip">
+        <input type="file" name="file" multiple/>
+        <input type="submit" value="zip upload"/>
+    </form>
+</body>
+</html>
