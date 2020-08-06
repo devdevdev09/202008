@@ -1,6 +1,11 @@
 server:
     port: 20040
 
+logging:
+  level:
+    root: DEBUG
+    
+
 FILE_UPLOAD_PATH: D:/data/slacktohtml/tmp/
 
 spring:
