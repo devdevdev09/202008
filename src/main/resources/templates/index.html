@@ -20,22 +20,27 @@
 
     <hr>
 
-    <div>
-        <a href="#">ch1</a>
-        <a href="#">ch2</a>
+    <div th:each="i : ${#numbers.sequence(0, 10)}">
+        <a th:id="ch- +${i}" name="channel">text2</span>
     </div>
 
-    <div id="ch1" style="display:none">
-        <span>text2</span>
-    </div>
-    <div id="ch2" style="display:none">
+    <div th:each="i : ${#numbers.sequence(0, 10)}" style="display:none">
         <span>text2</span>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script>
-function channelOpen(id){
-    $("#" + id).attr("style", "display:none");
+$(function(){
+    init();
+});
+
+function init(){
+    $("a[name=channel]").on("click", channelOpen)
+}
+
+
+function channelOpen(){
+    console.log($(this));
 }
 </script>
 </body>
