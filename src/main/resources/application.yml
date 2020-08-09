@@ -2,8 +2,10 @@ server:
     port: 20040
 
 logging:
-  level:
-    root: DEBUG
+    file:
+        name: /log/202008/slacktohtml.log
+    level:
+        root: DEBUG
     
 
 FILE_UPLOAD_PATH: D:/data/slacktohtml/tmp/
