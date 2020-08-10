@@ -28,10 +28,15 @@
         <span>text2</span>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script>
+<th:block th:replace="fragments/script"></th:block>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var list = /*[[${list}]]*/ 'default';
+/*]]>*/
+
 $(function(){
     init();
+    console.log("tttttttttttt");
 });
 
 function init(){

@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>result1.html</title>
 </head>
 <body>
-    <!-- <li th:each="test : ${list}">
-        <span th:text="${test.username}"></span>
-        <span th:text="${test.type}"></span>
-    </li>
-
-    <ol th:each="test : ${list}">
-        <li th:text="${test.username}"></li>
-        <li th:text="${test.type}"></li>
-    </ol> -->
     <h1>result1.html</h1>
     <ul th:each="item : ${result}">
         <li th:if="${item.isDirectory}">
@@ -24,8 +15,17 @@
             <span th:text="${item.name}"></span> 
             &nbsp;&nbsp;&nbsp;<span th:text="${item.content}"></span> 
         </li>
-        
-        <!-- <span th:text="${item.content}"></span> -->
     </ul>
+<th:block th:replace="fragments/script"></th:block>
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var list = /*[[${result}]]*/ 'default';
+/*]]>*/
+
+$(function(){
+    console.log(list);
+});
+
+</script>    
 </body>
 </html>
