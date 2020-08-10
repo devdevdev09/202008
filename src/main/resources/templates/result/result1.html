@@ -13,7 +13,7 @@
         </li>
         <li th:unless="${item.isDirectory}">
             <span th:text="${item.name}"></span> 
-            &nbsp;&nbsp;&nbsp;<span th:text="${item.content}"></span> 
+            <!-- &nbsp;&nbsp;&nbsp;<span th:text="${item.content}"></span>  -->
         </li>
     </ul>
 <th:block th:replace="fragments/script"></th:block>

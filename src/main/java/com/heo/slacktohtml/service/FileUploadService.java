@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
+import javax.print.Doc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,25 +80,26 @@ public class FileUploadService {
             ZipEntry zipEntry = entries.nextElement();
 
             String fileName = zipEntry.getName();
-            String[] arr = fileName.split("/");
 
-
-            int idx = fileName.lastIndexOf("/");
+            if(!isWorkspaceInfo(fileName)){
+                continue;
+            }
 
             if(!zipEntry.isDirectory()){
                 item.put("isDirectory", false);
-
-                
-                // String channel = fileName.substring(0, idx);
-                // String date = fileName.substring(idx + 1);
-                // logger.debug("channel : date :: " + channel + " : " + date);
 
                 String content;
                 try {
                     InputStream inStream = zipFile.getInputStream(zipEntry);
                     content = byteToString(inStream.readAllBytes());
 
-                    item.put("content", content);
+                    List<Object> jsonList = stringToList(content);
+
+                    // if(fileName.equals("user.json")){
+                    //     jsonList = getUserInfo(jsonList);
+                    // }
+
+                    item.put("jsonList", jsonList);
                     logger.debug("fileName :: " + content);
 
                     inStream.close();
@@ -112,4 +116,17 @@ public class FileUploadService {
 
         return list;
     }
+
+    // workspace 정보만 가져옴(채널 정보, 유저 정보)
+    public boolean isWorkspaceInfo(String fileName){
+        List<String> parsingList = Arrays.asList("users.json", "channels.json");
+
+        return parsingList.contains(fileName);
+    }
+
+    public List<Object> getUserInfo(List<Object> jsonList){
+        return null;
+    }
+
+
 }
