@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import javax.print.Doc;
+
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.heo.slacktohtml.vo.Channel;
+import com.heo.slacktohtml.vo.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,9 +100,13 @@ public class FileUploadService {
 
                     List<Object> jsonList = stringToList(content);
 
-                    // if(fileName.equals("user.json")){
-                    //     jsonList = getUserInfo(jsonList);
-                    // }
+                    if(fileName.equals("users.json")){
+                        jsonList = getUserInfo(jsonList);
+                    }
+
+                    if(fileName.equals("channels.json")){
+                        jsonList = getChannelInfo(jsonList);
+                    }
 
                     item.put("jsonList", jsonList);
                     logger.debug("fileName :: " + content);
@@ -117,15 +126,45 @@ public class FileUploadService {
         return list;
     }
 
+    @Value("${slack.parse.filename}")
+    List<String> PARSE_FILE_LIST;    
+
     // workspace 정보만 가져옴(채널 정보, 유저 정보)
     public boolean isWorkspaceInfo(String fileName){
-        List<String> parsingList = Arrays.asList("users.json", "channels.json");
+        List<String> parsingList = PARSE_FILE_LIST;
 
         return parsingList.contains(fileName);
     }
 
     public List<Object> getUserInfo(List<Object> jsonList){
-        return null;
+
+        List<Object> list = new ArrayList<Object>();
+        
+        for (Object object : jsonList) {
+            LinkedHashMap lhMap = (LinkedHashMap)object;
+            User usr = new User();
+            usr.setId((String)lhMap.get("id"));
+            usr.setName((String)lhMap.get("name"));
+            usr.setReal_name((String)lhMap.get("real_name"));
+            list.add(usr);
+        }
+    
+        return list;
+    }
+
+    public List<Object> getChannelInfo(List<Object> jsonList){
+        List<Object> list = new ArrayList<Object>();
+
+        for(Object object : jsonList){
+            LinkedHashMap lhMap = (LinkedHashMap)object;
+            Channel channel = new Channel();
+            channel.setName((String)lhMap.get("name"));
+            channel.setTopic((String)((LinkedHashMap)lhMap.get("topic")).get("value"));
+            channel.setMembers((List)lhMap.get("members"));
+            list.add(channel);
+        }
+
+        return list;
     }
 
 

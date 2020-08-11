@@ -14,3 +14,9 @@ spring:
     servlet:
         multipart:
             location: D:/data/slacktohtml/tmp/
+
+
+# slack parse filename string list
+slack:
+    parse:
+        filename: users.json, channels.json

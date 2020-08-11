@@ -7,6 +7,11 @@
 
 ## TODO
 - users.json, channels.json 먼저 파싱
+- service 분리하기(파싱..)
+
+### 2020-08-11
+- yml string list 추가
+- users, channels에서 필요한 정보만 list로 재구성
 
 ### 2020-08-10
 - 타임리프 추가
