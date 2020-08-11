@@ -8,5 +8,5 @@ import lombok.Data;
 public class Channel {
     String name;
     String topic;
-    List members;
+    List<String> members;
 }

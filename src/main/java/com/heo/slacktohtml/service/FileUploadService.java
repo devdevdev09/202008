@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -13,9 +12,6 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import javax.print.Doc;
-
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.heo.slacktohtml.vo.Channel;
 import com.heo.slacktohtml.vo.User;
 
@@ -160,7 +156,7 @@ public class FileUploadService {
             Channel channel = new Channel();
             channel.setName((String)lhMap.get("name"));
             channel.setTopic((String)((LinkedHashMap)lhMap.get("topic")).get("value"));
-            channel.setMembers((List)lhMap.get("members"));
+            channel.setMembers((List<String>)lhMap.get("members"));
             list.add(channel);
         }
 
