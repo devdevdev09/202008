@@ -1,14 +1,12 @@
 package com.heo.slacktohtml.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.heo.slacktohtml.enums.FileEnums;
+import com.heo.slacktohtml.enums.UserField;
 import com.heo.slacktohtml.vo.Channel;
-import com.heo.slacktohtml.vo.User;
 
 import org.springframework.stereotype.Service;
 
@@ -17,28 +15,33 @@ public class ParseService {
     public List<Map<String, Object>> getUserInfo(List<Map<String, Object>> jsonList){
 
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        // List<String> removeList = new ArrayList<String>();
         
-        for (Map<String, Object> map : jsonList) {
+        // for (Map<String, Object> map : jsonList) {
 
-            for(String key : map.keySet()){
-                boolean isKey = false;
+        //     for(String key : map.keySet()){
+        //         boolean isKey = false;
 
-                for (FileEnums filename : FileEnums.values()) {
-                    if(key.equals(filename.toString())){
-                        isKey = true;
-                    }
-                }
+        //         for (UserField field : UserField.values()) {
+        //             if(key.equals(field.toString())){
+        //                 isKey = true;
+        //             }
+        //         }
 
-                if(!isKey){
-                    map.remove(key);
-                }
-            }
-            // User usr = new User();
-            // usr.setId((String)lhMap.get("id"));
-            // usr.setName((String)lhMap.get("name"));
-            // usr.setReal_name((String)lhMap.get("real_name"));
+        //         if(!isKey){
+        //             removeList.add(key);
+        //         }
+        //     }
+        //     // User usr = new User();
+        //     // usr.setId((String)lhMap.get("id"));
+        //     // usr.setName((String)lhMap.get("name"));
+        //     // usr.setReal_name((String)lhMap.get("real_name"));
             
-        }
+        // }
+
+        // for(String remove : removeList){
+        //     jsonList.remove(remove);
+        // }
     
         return jsonList;
     }

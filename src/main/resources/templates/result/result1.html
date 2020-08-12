@@ -7,15 +7,17 @@
 </head>
 <body>
     <h1>result1.html</h1>
-    <ul th:each="item : ${result}">
+    <!-- <ul th:each="item : ${result}">
         <li th:if="${item.isDirectory}">
             <span th:text="${item.name}"></span> 
         </li>
         <li th:unless="${item.isDirectory}">
             <span th:text="${item.name}"></span> 
-            <!-- &nbsp;&nbsp;&nbsp;<span th:text="${item.content}"></span>  -->
         </li>
-    </ul>
+    </ul> -->
+
+    <button id="userBtn">users</button>
+    <button id="channelBtn">channels</button>
 <th:block th:replace="fragments/script"></th:block>
 <script th:inline="javascript">
 /*<![CDATA[*/
@@ -24,7 +26,26 @@
 
 $(function(){
     console.log(list);
+    $("#userBtn").on("click", usersConsole);
+    $("#channelBtn").on("click", channelsConsole);
 });
+
+const usersConsole = function(){
+    
+    list.forEach(item => {
+        if(item.name == "users.json"){
+            console.log(item);
+        }
+    });
+}
+
+const channelsConsole = function(){
+    list.forEach(item => {
+        if(item.name == "channels.json"){
+            console.log(item);
+        }
+    });
+}
 
 </script>    
 </body>

@@ -120,27 +120,29 @@ public class FileUploadService {
 
             String fileName = zipEntry.getName();
 
-            if(!zipEntry.isDirectory()){
-                item.put("isDirectory", false);
-
-                String content;
-                try {
-                    InputStream inStream = zipFile.getInputStream(zipEntry);
-                    content = byteToString(inStream.readAllBytes());
-
-                    List<Object> jsonList = stringToList(content);
-                    item.put("jsonList", jsonList);
-
-                    inStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            // if(fileName.equals("users.json") || fileName.equals("channels.json")){
+                if(!zipEntry.isDirectory()){
+                    item.put("isDirectory", false);
+                    
+                    String content;
+                    try {
+                        InputStream inStream = zipFile.getInputStream(zipEntry);
+                        content = byteToString(inStream.readAllBytes());
+                        
+                        List<Object> jsonList = stringToList(content);
+                        item.put("jsonList", jsonList);
+                        
+                        inStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    item.put("isDirectory", true);    
                 }
-            }else{
-                item.put("isDirectory", true);    
-            }
-            item.put("name", fileName);
-
-            list.add(item);
+                item.put("name", fileName);
+                
+                list.add(item);
+            // }
         }
 
         return list;
