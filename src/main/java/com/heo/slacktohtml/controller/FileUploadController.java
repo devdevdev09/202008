@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.zip.ZipFile;
 
 import com.heo.slacktohtml.service.FileUploadService;
+import com.heo.slacktohtml.service.ParseService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,23 +27,8 @@ public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
 
-    @PostMapping("/upload")
-    public String fileUpload(@RequestParam("file") List<MultipartFile> files, Model model) throws IOException {
-        List<Object> list;
-
-        for (MultipartFile file : files) {
-            String content = fileUploadService.fileToString(file);
-
-            list = fileUploadService.stringToList(content);
-
-            model.addAttribute("list" + files.indexOf(file), list);
-        }
-
-        return "result/result1";
-    }
-
-    @Value("${FILE_UPLOAD_PATH}")
-    String FILE_UPLOAD_PATH;
+    @Autowired
+    ParseService parseService;
 
     @PostMapping("/uploadzip")
     public String zipFileUpload(@RequestParam("file") MultipartFile mfile
@@ -51,9 +36,13 @@ public class FileUploadController {
         try {
             File file = fileUploadService.multipartToFile(mfile);
             
+            
             ZipFile zipFile = new ZipFile(file);
 
+            // zipfile 전체 데이터 가져오기
             List<Map<String, Object>> list = fileUploadService.readContent(zipFile);
+
+            list = parseService.getUserInfo(list);
 
             zipFile.close();
 
@@ -68,5 +57,4 @@ public class FileUploadController {
         }
         return "result/result1";
     }
-    
 }

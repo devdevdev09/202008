@@ -6,27 +6,11 @@
     <title>index</title>
 </head>
 <body>
-    <form method="POST" enctype="multipart/form-data" action="/fileupload/upload">
-        <input type="file" name="file" multiple/>
-        <input type="submit" value="upload"/>
-    </form>
-
-    <hr>
 
     <form method="POST" enctype="multipart/form-data" action="/fileupload/uploadzip">
         <input type="file" name="file" multiple/>
         <input type="submit" value="zip upload"/>
     </form>
-
-    <hr>
-
-    <div th:each="i : ${#numbers.sequence(0, 10)}">
-        <a th:id="ch- +${i}" name="channel">text2</span>
-    </div>
-
-    <div th:each="i : ${#numbers.sequence(0, 10)}" style="display:none">
-        <span>text2</span>
-    </div>
 
 <th:block th:replace="fragments/script"></th:block>
 <script th:inline="javascript">
@@ -36,17 +20,12 @@
 
 $(function(){
     init();
-    console.log("tttttttttttt");
 });
 
 function init(){
-    $("a[name=channel]").on("click", channelOpen)
+    
 }
 
-
-function channelOpen(){
-    console.log($(this));
-}
 </script>
 </body>
 </html>

@@ -6,9 +6,6 @@ logging:
         name: /log/202008/slacktohtml.log
     level:
         root: DEBUG
-    
-
-FILE_UPLOAD_PATH: D:/data/slacktohtml/tmp/
 
 spring:
     servlet:
