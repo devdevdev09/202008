@@ -18,35 +18,13 @@
 
     <button id="userBtn">users</button>
     <button id="channelBtn">channels</button>
+    <input id="channelName"><button id="testBtn">getContent</button>
 <th:block th:replace="fragments/script"></th:block>
 <script th:inline="javascript">
 /*<![CDATA[*/
     var list = /*[[${result}]]*/ 'default';
 /*]]>*/
-
-$(function(){
-    console.log(list);
-    $("#userBtn").on("click", usersConsole);
-    $("#channelBtn").on("click", channelsConsole);
-});
-
-const usersConsole = function(){
-    
-    list.forEach(item => {
-        if(item.name == "users.json"){
-            console.log(item);
-        }
-    });
-}
-
-const channelsConsole = function(){
-    list.forEach(item => {
-        if(item.name == "channels.json"){
-            console.log(item);
-        }
-    });
-}
-
-</script>    
+</script>
+<script type="text/javascript" th:src="@{/js/result/result.js}"></script>
 </body>
 </html>
