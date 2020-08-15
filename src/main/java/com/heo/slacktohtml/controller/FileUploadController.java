@@ -42,8 +42,6 @@ public class FileUploadController {
             // zipfile 전체 데이터 가져오기
             List<Map<String, Object>> list = fileUploadService.readContent(zipFile);
 
-            list = parseService.getUserInfo(list);
-
             zipFile.close();
 
             if(file.exists()){
