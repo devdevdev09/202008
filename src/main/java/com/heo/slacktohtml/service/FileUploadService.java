@@ -58,58 +58,7 @@ public class FileUploadService {
         return list;
     }
 
-    // public List<Map<String,Object>> readContent(ZipFile zipFile){
-    //     List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-
-    //     Enumeration<? extends ZipEntry> entries = zipFile.entries();
-        
-    //     while(entries.hasMoreElements()){
-    //         Map<String, Object> item = new HashMap<String, Object>();
-    //         ZipEntry zipEntry = entries.nextElement();
-
-    //         String fileName = zipEntry.getName();
-
-    //         if(!isWorkspaceInfo(fileName)){
-    //             continue;
-    //         }
-
-    //         if(!zipEntry.isDirectory()){
-    //             item.put("isDirectory", false);
-
-    //             String content;
-    //             try {
-    //                 InputStream inStream = zipFile.getInputStream(zipEntry);
-    //                 content = byteToString(inStream.readAllBytes());
-
-    //                 List<Object> jsonList = stringToList(content);
-
-    //                 if(fileName.equals("users.json")){
-    //                     jsonList = getUserInfo(jsonList);
-    //                 }
-
-    //                 if(fileName.equals("channels.json")){
-    //                     jsonList = getChannelInfo(jsonList);
-    //                 }
-
-    //                 item.put("jsonList", jsonList);
-    //                 logger.debug("fileName :: " + content);
-
-    //                 inStream.close();
-    //             } catch (IOException e) {
-    //                 e.printStackTrace();
-    //             }
-    //         }else{
-    //             item.put("isDirectory", true);    
-    //         }
-    //         item.put("name", fileName);
-
-    //         list.add(item);
-    //     }
-
-    //     return list;
-    // }
-
-        public List<Map<String,Object>> readContent(ZipFile zipFile){
+    public List<Map<String,Object>> readContent(ZipFile zipFile){
         List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
 
         Enumeration<? extends ZipEntry> entries = zipFile.entries();

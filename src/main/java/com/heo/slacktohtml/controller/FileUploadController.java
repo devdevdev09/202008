@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.zip.ZipFile;
 
 import com.heo.slacktohtml.service.FileUploadService;
-import com.heo.slacktohtml.service.ParseService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,30 +26,25 @@ public class FileUploadController {
     @Autowired
     FileUploadService fileUploadService;
 
-    @Autowired
-    ParseService parseService;
-
     @PostMapping("/uploadzip")
-    public String zipFileUpload(@RequestParam("file") MultipartFile mfile
-                                ,Model model) {
+    public String zipFileUpload(@RequestParam("file") final MultipartFile mfile, final Model model) {
         try {
-            File file = fileUploadService.multipartToFile(mfile);
-            
-            
-            ZipFile zipFile = new ZipFile(file);
+            final File file = fileUploadService.multipartToFile(mfile);
+
+            final ZipFile zipFile = new ZipFile(file);
 
             // zipfile 전체 데이터 가져오기
-            List<Map<String, Object>> list = fileUploadService.readContent(zipFile);
+            final List<Map<String, Object>> list = fileUploadService.readContent(zipFile);
 
             zipFile.close();
 
-            if(file.exists()){
-                boolean isDelete = file.delete();
-                logger.debug("파일 삭제 " + ((isDelete)? "성공" : "실패"));
+            if (file.exists()) {
+                final boolean isDelete = file.delete();
+                logger.debug("파일 삭제 " + ((isDelete) ? "성공" : "실패"));
             }
 
             model.addAttribute("result", list);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
         return "result/result1";

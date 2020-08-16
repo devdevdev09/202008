@@ -9,6 +9,9 @@
 - users.json, channels.json 먼저 파싱
 - service 분리하기(파싱..)
 
+### 2020-08-16
+- remove deadcode
+
 ### 2020-08-13
 - js로 원하는 데이터 가져오게 변경
 
