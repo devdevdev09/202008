@@ -1,5 +1,4 @@
 $(function(){
-    console.log(list);
     $("#userBtn").on("click", usersConsole);
     $("#channelBtn").on("click", channelsConsole);
     $("#testBtn").on("click", getFileContent);
@@ -9,11 +8,13 @@ let users = [];
 let channels = [];
 
 const usersConsole = function(){
+    clearContent();
     
     list.forEach(item => {
         if(item.name == "users.json"){
             item.jsonList.forEach(user => {
                 users.push(user);
+                appendContent(user.real_name);
             })
         }
     });
@@ -22,10 +23,13 @@ const usersConsole = function(){
 }
 
 const channelsConsole = function(){
+    clearContent();
+
     list.forEach(item => {
         if(item.name == "channels.json"){
             item.jsonList.forEach(channel =>{
                 channels.push(channel);
+                appendContent(channel.name);;
             });
         }
     });
@@ -33,7 +37,7 @@ const channelsConsole = function(){
 }
 
 const getFileContent = function(){
-    $("#fileContent").html("");
+    clearContent();
     var fileName = $("#channelName").val();
     
     list.forEach(item => {
@@ -42,7 +46,7 @@ const getFileContent = function(){
             item.jsonList.forEach(msg => {
                 console.log(msg.text);
 
-                $("#fileContent").append(msg.text + "\n");
+                appendContent(msg.text);
             })
         }
     })
@@ -50,4 +54,12 @@ const getFileContent = function(){
 
 const fileNameCheck = function(filename1, filename2){
     return filename1.replace(/([0-9]|-|.json|\/)/g,"") == filename2;
+}
+
+const appendContent = function(content){
+    $("#fileContent").append(content + "\n");
+}
+
+const clearContent = function(){
+    $("#fileContent").html("");
 }
