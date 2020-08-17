@@ -9,6 +9,9 @@
 - users.json, channels.json 먼저 파싱
 - service 분리하기(파싱..)
 
+### 2020-08-17
+- 파일 내용 html에 출력
+
 ### 2020-08-16
 - remove deadcode
 

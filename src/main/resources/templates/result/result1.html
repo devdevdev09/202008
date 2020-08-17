@@ -7,18 +7,17 @@
 </head>
 <body>
     <h1>result1.html</h1>
-    <!-- <ul th:each="item : ${result}">
-        <li th:if="${item.isDirectory}">
-            <span th:text="${item.name}"></span> 
-        </li>
-        <li th:unless="${item.isDirectory}">
-            <span th:text="${item.name}"></span> 
-        </li>
-    </ul> -->
 
     <button id="userBtn">users</button>
     <button id="channelBtn">channels</button>
     <input id="channelName"><button id="testBtn">getContent</button>
+
+<hr>
+<pre>
+<div id="fileContent">
+
+</div>
+</pre>
 <th:block th:replace="fragments/script"></th:block>
 <script th:inline="javascript">
 /*<![CDATA[*/
