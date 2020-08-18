@@ -1,7 +1,8 @@
 $(function(){
+    listSort();
     $("#userBtn").on("click", usersConsole);
     $("#channelBtn").on("click", channelsConsole);
-    $("#testBtn").on("click", getFileContent);
+    $("#getContentBtn").on("click", getFileContent);
 });
 
 let users = [];
@@ -13,8 +14,10 @@ const usersConsole = function(){
     list.forEach(item => {
         if(item.name == "users.json"){
             item.jsonList.forEach(user => {
-                users.push(user);
-                appendContent(user.real_name);
+                if(!user.is_bot){
+                    users.push(user);
+                    appendContent(user.profile.real_name + "(" + user.id + ")");
+                }
             })
         }
     });
@@ -34,6 +37,8 @@ const channelsConsole = function(){
         }
     });
     console.log(channels);
+
+    dailyChannels();
 }
 
 const getFileContent = function(){
@@ -44,16 +49,31 @@ const getFileContent = function(){
         // "test/2020-03-03.json".replace(/(test\/|.json)/g,"")
         if(item.isDirectory == false && fileNameCheck(item.name, fileName)){
             item.jsonList.forEach(msg => {
-                console.log(msg.text);
+                let chat = "[" + new Date(msg.ts*1000) + "] : " + msg.text;
+                // console.log( "[" + msg.user_profile.real_name +  "] : " + msg.text);
+                console.log(chat);
 
-                appendContent(msg.text);
+                appendContent(chat);
             })
         }
     })
 }
 
+let dailyChannelList = [];
+
+const dailyChannels = function(){
+    list.forEach(item => {
+        if(item.isDirectory == true){
+            dailyChannelList.push(item);
+        }
+    })
+
+    console.log(dailyChannelList);
+}
+
 const fileNameCheck = function(filename1, filename2){
-    return filename1.replace(/([0-9]|-|.json|\/)/g,"") == filename2;
+    // return filename1.replace(/([0-9]|-|.json|\/)/g,"") == filename2;
+    return filename1.replace(/\/(.*)/,"") == filename2;
 }
 
 const appendContent = function(content){
@@ -62,4 +82,10 @@ const appendContent = function(content){
 
 const clearContent = function(){
     $("#fileContent").html("");
+}
+
+const listSort = function(){
+    list.sort((a, b) => a.name.localeCompare(b.name));
+
+    console.log(list);
 }
